@@ -26,19 +26,39 @@ O: [["cat"], ["pot"], ["bag"]]
 # 1. I can have alphabetically ordered keys for letter 
 # I would have keys of letters, and values would be 
 
-# input lists & setup
-inputList1 = ["cat", "bag", "act", "tac", "top", "pot"]
-inputList2 = ["cat", "pot", "bag"]
-outputList1 = []
-outputList2 = []
-myDict = {}
+# [x] 1. iterate through list entries
+# [x] 2. sort letters in entry into alphabetic order
+# [x] 3. check if sorted entry is in dict. 
+# [] 4. If in dict, check if value list already has the original word 1st. If it does, don't add. Else, add the word
+# 5. If not in dict, add to dict with sorted entry as key, and unsorted appended to value list
+# 6. Output new list with all the groups
+
+
 
 # 1. iterate through list entries
-# 2. sort letters in entry into alphabetic order
-# 3. check if sorted entry is in dict
-# 4. If not in dict, add to dict with sorted entry as key, and unsorted appended to value list
-# 5. Check if value list already has the original word 1st. If it does, don't add. Else, add the word
-
 def anagramDetector(inputList):
-    for x in inputList:
-        
+    anaDict = {}
+    for str in inputList:
+        # 2. sort letters in entry into alphabetic order
+        sorted_str = ''.join(sorted(str))
+        # 3. check if sorted entry is in dict
+        if sorted_str in anaDict:
+            # 4. Check if value list already has the original word 1st. If so, don't add. Else, add the word
+            # print(anaDict[sorted_str])
+            if str not in anaDict[sorted_str]:
+                anaDict[sorted_str].append(str)
+        # 5. If not in dict, add to dict with sorted entry as key, and unsorted appended to value list
+        else:
+            anaDict[sorted_str] = [str]
+
+    # 6. Output new list with all the groups
+    finalList = []
+    for key in anaDict:
+        finalList.append(anaDict[key])
+
+    print(finalList)
+
+inputList1 = ["cat", "bag", "act", "tac", "top", "pot"]
+inputList2 = ["cat", "pot", "bag"]
+
+anagramDetector(inputList1)
